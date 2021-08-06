@@ -1,0 +1,39 @@
+name: Onboarding
+on:
+  pull_request:
+    branches:
+      - latest
+    types:
+      - closed
+jobs:
+  github:
+    name: Github organization membership
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v2
+
+      - name: Setup NodeJS
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: Install Terraform
+        uses: hashicorp/setup-terraform@main
+
+      - name: Checkout sources
+        uses: actions/checkout@v2
+
+      - name: Initialize modules
+        run: terraform init
+        with:
+          terraform-version: '1.0.4'
+
+      - name: Validate syntax
+        run: terraform validate
+
+      - name: Execute plan of required operations
+        run: terraform plan -input=false
+
+      - name: Perform changes
+        run: terraform apply -input=false -auto-approve
