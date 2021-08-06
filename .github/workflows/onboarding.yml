@@ -36,4 +36,5 @@ jobs:
         run: terraform plan -input=false
 
       - name: Perform changes
+        if: 'false'
         run: terraform apply -input=false -auto-approve

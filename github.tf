@@ -9,10 +9,12 @@ provider "github" {
 }
 
 data "github_repository_pull_requests" "employee" {
-  provider = github.employee
+  provider =        github.employee
   base_repository = "bn-enginseer"
-  base_ref = "latest"
-  state = "closed"
+  base_ref =        "latest"
+  sort_by =         "created"
+  sort_direction =  "asc"
+  state =           "closed"
 }
 
 locals {
@@ -22,7 +24,11 @@ locals {
 
 resource "github_membership" "organization-members" {
   provider = github.organization
-  count = length(local.employees)
-  username = local.employees[count.index]
-  role = "member"
+  count =    length(local.employees)
+  // noinspection HILUnresolvedReference
+  username = local.employees[count.index].head_owner
+  role =     "member"
+  lifecycle {
+    ignore_changes = [role]
+  }
 }

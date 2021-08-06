@@ -1,0 +1,10 @@
+root = true
+
+[*]
+ij_any_keep_line_breaks = false
+
+[{*.tf,*.tfvars}]
+ij_hcl-terraform_array_wrapping = 0
+ij_hcl-terraform_object_wrapping = 0
+ij_hcl-terraform_property_alignment = 1
+ij_hcl-terraform_spaces_around_assignment_operators = true
