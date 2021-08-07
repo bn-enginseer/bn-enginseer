@@ -12,6 +12,8 @@ jobs:
   github:
     name: Github organization membership
     runs-on: ubuntu-latest
+    env:
+      TF_VAR_github_org_token: ${{ secrets.ORG_GITHUB_TOKEN }}
     steps:
       - name: Checkout sources
         uses: actions/checkout@v2
@@ -31,7 +33,6 @@ jobs:
 
       - name: Initialize modules
         run: terraform init
-
 
       - name: Validate syntax
         run: terraform validate
