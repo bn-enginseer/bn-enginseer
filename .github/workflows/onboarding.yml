@@ -1,10 +1,13 @@
 name: Onboarding
 on:
   pull_request:
-    branches:
-      - latest
     types:
       - closed
+    branches:
+      - latest
+    paths:
+      - .github/workflows/CONTRIBUTING.md
+
 jobs:
   github:
     name: Github organization membership
@@ -23,11 +26,12 @@ jobs:
 
       - name: Checkout sources
         uses: actions/checkout@v2
+        with:
+          terraform-version: '1.0.4'
 
       - name: Initialize modules
         run: terraform init
-        with:
-          terraform-version: '1.0.4'
+
 
       - name: Validate syntax
         run: terraform validate

@@ -5,7 +5,7 @@ provider "github" {
 
 provider "github" {
   alias = "organization"
-  owner = "bn-enginseer"
+  owner = "bn-digital"
 }
 
 data "github_repository_pull_requests" "employee" {
